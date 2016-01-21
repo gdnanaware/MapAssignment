@@ -4,8 +4,7 @@ app.controller('MyController',function($scope){
     $scope.name = "";
     $scope.onEditChange = "";
 
-    console.log($scope.fldname);
-    
+       
     (function initialize() {
         var mapProp = {
         center:new google.maps.LatLng(18.50,74.16),
@@ -21,8 +20,7 @@ app.controller('MyController',function($scope){
   //---------------------------------OnClick search-----------------------------------------------------------------------------------   
       
     google.maps.event.addListener($scope.map, 'click', function(event) {
-   // alert(event.latLng);
-        
+  
          $scope.lat= event.latLng.lat();
          $scope.lng= event.latLng.lng();
          $scope.latlng = event.latLng; 
@@ -54,7 +52,6 @@ app.controller('MyController',function($scope){
                 
             console.log($scope.name);
                 
-               // console.log($scope.fldname);
             infowindow.open(map, $scope.mapMarker);
             $scope.$digest();
             }
