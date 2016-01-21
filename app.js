@@ -2,7 +2,7 @@ var app = angular.module('MyApp',[]);
 
 app.controller('MyController',function($scope){
     $scope.name = "";
-    
+    $scope.onEditChange = "";
 
     console.log($scope.fldname);
     
@@ -14,7 +14,7 @@ app.controller('MyController',function($scope){
         $scope.map=new google.maps.Map(document.getElementById("googleMap"), mapProp);
         $scope.geocoder = new google.maps.Geocoder;
         $scope.infowindow = new google.maps.InfoWindow;
-       
+        
        
     })();
 
@@ -50,12 +50,13 @@ app.controller('MyController',function($scope){
             infowindow.setContent(results[1].formatted_address);
                
               $scope.name = results[1].formatted_address;
-                $scope.$apply;
+                $scope.temp = "abc";
+                
             console.log($scope.name);
                 
                // console.log($scope.fldname);
             infowindow.open(map, $scope.mapMarker);
-            
+            $scope.$digest();
             }
             } 
             
@@ -66,11 +67,10 @@ app.controller('MyController',function($scope){
     
  //---------------------------------Address search-----------------------------------------------------------------------------------
      
-    $scope.$watch("name",function() {
-        geocodeAddress($scope.map,$scope.geocoder);
-    });
-    
-   
+    $scope.onEditChange = function () {
+         geocodeAddress($scope.map,$scope.geocoder);
+    };
+       
     function geocodeAddress(map,geocoder) {
          var address = $scope.name;
          geocoder.geocode({'address': address}, function(results, status) {
